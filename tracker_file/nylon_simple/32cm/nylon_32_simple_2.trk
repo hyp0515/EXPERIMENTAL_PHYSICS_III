@@ -4,16 +4,10 @@
     <property name="width" type="double">1280.0</property>
     <property name="height" type="double">720.0</property>
     <property name="magnification" type="double">1.5874010519681994</property>
-    <property name="center_x" type="int">1076</property>
-    <property name="center_y" type="int">648</property>
+    <property name="center_x" type="int">754</property>
+    <property name="center_y" type="int">732</property>
     <property name="videoclip" type="object">
     <object class="org.opensourcephysics.media.core.VideoClip">
-        <property name="video" type="object">
-        <object class="org.opensourcephysics.media.xuggle.XuggleVideo">
-            <property name="path" type="string">D:/09.22 slow motion/20230922_154552.mp4</property>
-        </object>
-        </property>
-        <property name="video_framecount" type="int">7559</property>
         <property name="startframe" type="int">0</property>
         <property name="stepsize" type="int">5</property>
         <property name="stepcount" type="int">1512</property>
@@ -119,8 +113,6 @@
             <property name="number_formats" type="array" class="[Ljava.lang.String;">
                 <property name="[0]" type="string">θ</property>
                 <property name="[1]" type="string">0.0</property>
-                <property name="[2]" type="string">ω</property>
-                <property name="[3]" type="string">0.0</property>
             </property>
             <property name="framedata" type="array" class="[Lorg.opensourcephysics.cabrillo.tracker.PointMass$FrameData;">
                 <property name="[0]" type="object">
@@ -9204,7 +9196,7 @@
     </property>
     <property name="selectedtrack" type="string">質量 A</property>
     <property name="dividers" type="array" class="[D">
-        <property name="array" type="string">{0.7856200527704486,0.5043478260869565,1.0,0.1866754617414248}</property>
+        <property name="array" type="string">{0.4213571804313519,0.5027563395810364,1.0,0.0967911625460284}</property>
     </property>
     <property name="views" type="array" class="[[Lorg.opensourcephysics.cabrillo.tracker.TView;">
         <property name="[1]" type="array" class="[Lorg.opensourcephysics.cabrillo.tracker.TView;">
@@ -9215,7 +9207,13 @@
                     <property name="[0]" type="array" class="[Ljava.lang.String;">
                         <property name="[0]" type="string">質量 A</property>
                         <property name="[1]" type="string">t</property>
-                        <property name="[2]" type="string">K</property>
+                        <property name="[2]" type="string">x</property>
+                        <property name="[3]" type="string">y</property>
+                        <property name="[4]" type="string">r</property>
+                        <property name="[5]" type="string">v</property>
+                        <property name="[6]" type="string">θ</property>
+                        <property name="[7]" type="string">p</property>
+                        <property name="[8]" type="string">K</property>
                     </property>
                 </property>
                 <property name="column_formats" type="array" class="[[[Ljava.lang.String;">
@@ -9232,15 +9230,10 @@
                         </property>
                         <property name="[2]" type="array" class="[Ljava.lang.String;">
                             <property name="[0]" type="string">質量 A</property>
-                            <property name="[1]" type="string">ω</property>
-                            <property name="[2]" type="string">0.0</property>
-                        </property>
-                        <property name="[3]" type="array" class="[Ljava.lang.String;">
-                            <property name="[0]" type="string">質量 A</property>
                             <property name="[1]" type="string">step</property>
                             <property name="[2]" type="string">0</property>
                         </property>
-                        <property name="[4]" type="array" class="[Ljava.lang.String;">
+                        <property name="[3]" type="array" class="[Ljava.lang.String;">
                             <property name="[0]" type="string">質量 A</property>
                             <property name="[1]" type="string">frame</property>
                             <property name="[2]" type="string">0</property>
