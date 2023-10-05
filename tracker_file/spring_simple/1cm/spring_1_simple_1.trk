@@ -4,16 +4,10 @@
     <property name="width" type="double">1280.0</property>
     <property name="height" type="double">720.0</property>
     <property name="magnification" type="double">2.0</property>
-    <property name="center_x" type="int">1151</property>
-    <property name="center_y" type="int">1100</property>
+    <property name="center_x" type="int">1355</property>
+    <property name="center_y" type="int">1030</property>
     <property name="videoclip" type="object">
     <object class="org.opensourcephysics.media.core.VideoClip">
-        <property name="video" type="object">
-        <object class="org.opensourcephysics.media.xuggle.XuggleVideo">
-            <property name="path" type="string">../20230922_151417.mp4</property>
-        </object>
-        </property>
-        <property name="video_framecount" type="int">8446</property>
         <property name="startframe" type="int">128</property>
         <property name="stepsize" type="int">5</property>
         <property name="stepcount" type="int">1664</property>
@@ -26,7 +20,7 @@
     <object class="org.opensourcephysics.media.core.StepperClipControl">
         <property name="rate" type="double">1.0</property>
         <property name="delta_t" type="double">33.28000614537827</property>
-        <property name="frame" type="int">8443</property>
+        <property name="frame" type="int">8313</property>
     </object>
     </property>
     <property name="coords" type="object">
@@ -40,7 +34,7 @@
             <object class="org.opensourcephysics.media.core.ImageCoordSystem$FrameData">
                 <property name="xorigin" type="double">620.9429280397022</property>
                 <property name="yorigin" type="double">191.2655086848635</property>
-                <property name="angle" type="double">0.6052145972448156</property>
+                <property name="angle" type="double">0.6052145972448154</property>
                 <property name="xscale" type="double">750.003394561546</property>
                 <property name="yscale" type="double">750.003394561546</property>
             </object>
@@ -103,7 +97,7 @@
         </property>
         <property name="item" type="object">
         <object class="org.opensourcephysics.cabrillo.tracker.PointMass">
-            <property name="mass" type="double">1.0</property>
+            <property name="mass" type="double">0.3361</property>
             <property name="name" type="string">mass A</property>
             <property name="color" type="object">
             <object class="java.awt.Color">
@@ -116,6 +110,10 @@
             <property name="footprint" type="string">Footprint.Diamond</property>
             <property name="visible" type="boolean">true</property>
             <property name="trail" type="boolean">true</property>
+            <property name="number_formats" type="array" class="[Ljava.lang.String;">
+                <property name="[0]" type="string">θ</property>
+                <property name="[1]" type="string">0.0</property>
+            </property>
             <property name="framedata" type="array" class="[Lorg.opensourcephysics.cabrillo.tracker.PointMass$FrameData;">
                 <property name="[128]" type="object">
                 <object class="org.opensourcephysics.cabrillo.tracker.PointMass$FrameData">
@@ -10362,7 +10360,53 @@
     </property>
     <property name="selectedtrack" type="string">mass A</property>
     <property name="dividers" type="array" class="[D">
-        <property name="array" type="string">{0.6723963599595552,0.5980861244019139,1.0,0.4327603640040445}</property>
+        <property name="array" type="string">{0.5649658074697528,0.22932745314222713,1.0,0.22514466070489217}</property>
+    </property>
+    <property name="views" type="array" class="[[Lorg.opensourcephysics.cabrillo.tracker.TView;">
+        <property name="[1]" type="array" class="[Lorg.opensourcephysics.cabrillo.tracker.TView;">
+            <property name="[1]" type="object">
+            <object class="org.opensourcephysics.cabrillo.tracker.TableTView">
+                <property name="selected_track" type="string">mass A</property>
+                <property name="track_columns" type="array" class="[[Ljava.lang.String;">
+                    <property name="[0]" type="array" class="[Ljava.lang.String;">
+                        <property name="[0]" type="string">mass A</property>
+                        <property name="[1]" type="string">t</property>
+                        <property name="[2]" type="string">x</property>
+                        <property name="[3]" type="string">y</property>
+                        <property name="[4]" type="string">r</property>
+                        <property name="[5]" type="string">v</property>
+                        <property name="[6]" type="string">θ</property>
+                        <property name="[7]" type="string">p</property>
+                        <property name="[8]" type="string">K</property>
+                    </property>
+                </property>
+                <property name="column_formats" type="array" class="[[[Ljava.lang.String;">
+                    <property name="[0]" type="array" class="[[Ljava.lang.String;">
+                        <property name="[0]" type="array" class="[Ljava.lang.String;">
+                            <property name="[0]" type="string">mass A</property>
+                            <property name="[1]" type="string">t</property>
+                            <property name="[2]" type="string">0.000</property>
+                        </property>
+                        <property name="[1]" type="array" class="[Ljava.lang.String;">
+                            <property name="[0]" type="string">mass A</property>
+                            <property name="[1]" type="string">θ</property>
+                            <property name="[2]" type="string">0.0</property>
+                        </property>
+                        <property name="[2]" type="array" class="[Ljava.lang.String;">
+                            <property name="[0]" type="string">mass A</property>
+                            <property name="[1]" type="string">step</property>
+                            <property name="[2]" type="string">0</property>
+                        </property>
+                        <property name="[3]" type="array" class="[Ljava.lang.String;">
+                            <property name="[0]" type="string">mass A</property>
+                            <property name="[1]" type="string">frame</property>
+                            <property name="[2]" type="string">0</property>
+                        </property>
+                    </property>
+                </property>
+            </object>
+            </property>
+        </property>
     </property>
     <property name="selected_view_types" type="array" class="[I">
         <property name="array" type="string">{0,1,2,3}</property>
