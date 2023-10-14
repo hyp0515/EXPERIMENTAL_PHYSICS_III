@@ -36,7 +36,18 @@ params, covariance = curve_fit(
 # print(x_amp)
 # print(params) 
 
-plt.scatter(data['t'], data['x'], label = 'experiment', color = 'red')
-plt.plot(data['t'], sin_function(data['t'], *params), label = 'fitted result')
-plt.legend()
+# plt.scatter(data['t'], data['x'], label = 'experiment', color = 'red')
+# plt.plot(data['t'], sin_function(data['t'], *params), label = 'fitted result')
+# plt.legend()
+# plt.show()
+
+###############################################################################
+theta = data['theta'].copy()
+dtheta = theta[1:]-theta[:-1]
+theta = theta[1:]
+t = data['t'].copy()
+dt = t[1:]-t[:-1]
+omega = dtheta/dt  # Angular velocity
+
+plt.scatter(theta, omega)
 plt.show()

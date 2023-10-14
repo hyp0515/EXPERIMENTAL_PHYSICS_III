@@ -67,6 +67,9 @@ t = data['t'].copy()
 dt = t[1:]-t[:-1]
 omega = dtheta/dt  # Angular velocity
 
+plt.scatter(theta[:100], omega[:100])
+plt.show()
+
 def fitEllipse(x, y):
     x, y = x[:,np.newaxis], y[:,np.newaxis]
     D = np.hstack((x*x, x*y, y*y, x, y, np.ones_like(x)))
@@ -115,12 +118,12 @@ center = ellipse_center(a)
 phi = ellipse_angle_of_rotation(a)
 axes = ellipse_axis_length(a)
 
-fig, ax = plt.subplots()
-ax.scatter(theta, omega, color='blue', s=5, label='Data')
-ellipse = Ellipse(xy=center, width=2*axes[0], height=2*axes[1], angle=np.degrees(phi), edgecolor='r', facecolor='none')
-ax.add_patch(ellipse)
-plt.title("Phase Diagram")
-plt.xlabel(r"$\theta$")
-plt.ylabel(r"$\omega$")
-plt.legend()
-plt.show()
+# fig, ax = plt.subplots()
+# ax.scatter(theta, omega, color='blue', s=5, label='Data')
+# ellipse = Ellipse(xy=center, width=2*axes[0], height=2*axes[1], angle=np.degrees(phi), edgecolor='r', facecolor='none')
+# ax.add_patch(ellipse)
+# plt.title("Phase Diagram")
+# plt.xlabel(r"$\theta$")
+# plt.ylabel(r"$\omega$")
+# plt.legend()
+# plt.show()
