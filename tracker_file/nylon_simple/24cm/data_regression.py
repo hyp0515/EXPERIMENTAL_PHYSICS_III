@@ -26,7 +26,7 @@ theta_mean = np.mean(data['theta'])
 ###############################################################################
 # Convenient function for getting index of time data
 def second_to_index(time):
-    return np.searchsorted(data['t'], time)
+    return np.searchsorted(data['t'], time) 
 ###############################################################################
 # Fitting x displacement to get the period of the pendulum
 def sin_function(t, A, decay, omega, c, d):   
