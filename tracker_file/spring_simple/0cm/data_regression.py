@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
-file_path = "spring_0_simple_3.xlsx"
+file_path = "./tracker_file/spring_simple/0cm/spring_0_simple_3.xlsx"
 
 df = pd.read_excel(file_path, engine='openpyxl')
 raw_data = np.array(df)
@@ -17,8 +17,8 @@ x_mean = np.mean(data['x'])
 x_amp = np.max(data['x'])-x_mean
 theta_mean = np.mean(data['theta'])
 
-# plt.plot(data['t'], data['x'])
-# plt.show()
+plt.plot(data['t'], data['r'])
+plt.show()
 ###############################################################################
 def second_to_index(time):
     return np.searchsorted(data['t'], time)
@@ -36,7 +36,7 @@ params, covariance = curve_fit(
 # print(x_amp)
 # print(params)
 
-plt.scatter(data['t'], data['x'], label = 'experiment', color = 'red')
-plt.plot(data['t'], sin_function(data['t'], *params), label = 'fitted result')
-plt.legend()
-plt.show()
+# plt.scatter(data['t'], data['x'], label = 'experiment', color = 'red')
+# plt.plot(data['t'], sin_function(data['t'], *params), label = 'fitted result')
+# plt.legend()
+# plt.show()

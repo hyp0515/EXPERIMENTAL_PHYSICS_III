@@ -6,7 +6,7 @@ from scipy.optimize import curve_fit
 g = 9.81
 k = 0.1
 
-file_path = "spring_3_simple_3.xlsx"
+file_path = "./tracker_file/spring_simple/3cm/spring_3_simple_2.xlsx"
 
 df = pd.read_excel(file_path, engine='openpyxl')
 raw_data = np.array(df)
@@ -66,10 +66,20 @@ omega = dtheta/dt  # Angular velocity
 # plt.show()
 
 
-plt.plot(data['t'], data['k'])
-plt.show()
+# plt.plot(data['t'], data['k'])
+# plt.show()
 
-K  = data['k']
-Ug = mass * g * dy
-Uk = 0.5*k*dr**2
+# K  = data['k']
+# Ug = mass * g * dy
+# Uk = 0.5*k*dr**2
 
+t_remake = np.linspace(0, (142/3420)*(len(data['t'])), len(data['t']))
+
+x = data['x']
+
+dx = x[1:]-x[:-1]
+dt = t_remake[1:]-t_remake[:-1]
+v_x = dx/dt
+
+k = 0.5*0.336*v_x**2
+print(np.max(k))
