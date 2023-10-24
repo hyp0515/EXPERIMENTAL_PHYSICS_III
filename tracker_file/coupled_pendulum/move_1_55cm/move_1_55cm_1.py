@@ -12,8 +12,8 @@ def extract_data_from_path(path):
     columns = ['t', 'x', 'y', 'r', 'v', 'theta']
     data = {col: raw_data[:, idx] for idx, col in enumerate(columns)}
     return data
-data_L = extract_data_from_path("./tracker_file/coupled_pendulum/move_1_55cm/couple_5_L.xlsx")
-data_R = extract_data_from_path("./tracker_file/coupled_pendulum/move_1_55cm/couple_5_R.xlsx")
+data_L = extract_data_from_path("./tracker_file/coupled_pendulum/move_1_55cm/move_1_55cm_1_L.xlsx")
+data_R = extract_data_from_path("./tracker_file/coupled_pendulum/move_1_55cm/move_1_55cm_1_R.xlsx")
 # sync time
 new_t_L = np.linspace(0, 131, len(data_L['t']))  
 new_t_R = np.linspace(0, 131, len(data_R['t']))

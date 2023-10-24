@@ -12,8 +12,8 @@ def extract_data_from_path(path):
     columns = ['t', 'x', 'y', 'r', 'v', 'theta']
     data = {col: raw_data[:, idx] for idx, col in enumerate(columns)}
     return data
-data_L = extract_data_from_path("./tracker_file/coupled_pendulum/move_1_40cm/couple_3_L.xlsx")
-data_R = extract_data_from_path("./tracker_file/coupled_pendulum/move_1_40cm/couple_3_R.xlsx")
+data_L = extract_data_from_path("./tracker_file/coupled_pendulum/move_1_40cm/move_1_40cm_3_L.xlsx")
+data_R = extract_data_from_path("./tracker_file/coupled_pendulum/move_1_40cm/move_1_40cm_3_R.xlsx")
 # sync time
 new_t_L = np.linspace(0, 73, len(data_L['t']))  
 new_t_R = np.linspace(0, 73, len(data_R['t']))
@@ -123,5 +123,21 @@ xf = xf[:t.size//2]
 peaks, _ = find_peaks(2/N*np.abs(yf), height=0.01)
 phase_angles = np.angle(yf[peaks])
 
-print("Identified Peak Frequencies (Hz):", xf[peaks])
-print(0.5*2*np.pi*(+xf[peaks][0]+xf[peaks][1]))
+print("Identified Peak Frequencies (Hz):", xf[peaks]*2*np.pi)
+# print(0.5*2*np.pi*(+xf[peaks][0]+xf[peaks][1]))
+
+import sys
+sys.path.append('./coupled_pendulum_model')
+from coupled_pendulum_model import move_1_coupled_pendulum
+
+
+D_array = np.linspace(0.21, 0.56, 100)
+md = move_1_coupled_pendulum(D=D_array,s=0.18,d=0.21,L=0.41)  
+plt.plot(D_array, md.omega_s, label='s')
+plt.plot(D_array, md.omega_a, label='a')
+# plt.legend()
+# plt.plot(D_array, md.N)
+plt.scatter(0.40, xf[peaks[1]]*2*np.pi, label='s')
+plt.scatter(0.40, xf[peaks[0]]*2*np.pi, label='a')
+plt.legend()
+plt.show()
