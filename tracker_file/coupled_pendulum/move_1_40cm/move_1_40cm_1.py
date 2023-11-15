@@ -28,30 +28,33 @@ def second_to_index_R(time):
 def sin_function(t, A, decay, omega_1, omega_2, d, e, f):   
     return A*np.exp(-decay*t)*np.cos(omega_1*t+d)*np.sin(omega_2*t+e)+f
 
-params_R, covariance_R = curve_fit(
-    sin_function, 
-    data_R['t'], 
-    data_R['x'],
-    p0=[1, 0.01, np.pi/23.3, 2*np.pi/1.45, 0, 0, 0.009],
-)  
 params_L, covariance_L = curve_fit(
     sin_function, 
     data_L['t'], 
     data_L['x'],
     p0=[1, 0.01, np.pi/23.3, 2*np.pi/1.45, 0, 0, 0.009],
 )  
+
+params_R, covariance_R = curve_fit(
+    sin_function, 
+    data_R['t'], 
+    data_R['x'],
+    p0=[1, 0.01, np.pi/23.3, 2*np.pi/1.45, 0, 0, 0.009],
+)
+data_L['x'] = data_L['x'] - params_L[-1]
+data_R['x'] = data_R['x'] - params_R[-1]
 ###############################################################################
 T = 69  # Total duration in seconds
-N = len(data_L['t'])  # Total number of data points
-fs = N / T  # Sampling rate in Hz
+# N = len(data_L['t'])  # Total number of data points
+# fs = N / T  # Sampling rate in Hz
 
-# Generate a time vector
-t = data_L['t'].copy()  # Time vector from 0 to T seconds
-y_noisy = data_L['x']-params_L[-1]
+# # Generate a time vector
+# t = data_L['t'].copy()  # Time vector from 0 to T seconds
+# y_noisy = data_L['x']-params_L[-1]
 
-# Apply FFT
-yf = np.fft.fft(y_noisy)
-xf = np.fft.fftfreq(N, 1/fs)
+# # Apply FFT
+# yf = np.fft.fft(y_noisy)
+# xf = np.fft.fftfreq(N, 1/fs)
 
 # Plotting
 # plt.subplot(2,1,1)
@@ -69,30 +72,60 @@ xf = np.fft.fftfreq(N, 1/fs)
 # plt.show()
 
 
-yf = yf[:t.size//2]
-xf = xf[:t.size//2]
-peaks, _ = find_peaks(2/N*np.abs(yf), height=0.01)
-phase_angles = np.angle(yf[peaks])
+# yf = yf[:t.size//2]
+# xf = xf[:t.size//2]
+# peaks, _ = find_peaks(2/N*np.abs(yf), height=0.01)
+# phase_angles = np.angle(yf[peaks])
 
+# def sin_function_refit(t, decay, A, B, e):
+#     omega_s = xf[peaks[1]]
+#     omega_a = xf[peaks[0]]
+#     symmetry = A*np.cos(2*np.pi*omega_s*t+phase_angles[1])
+#     antisymmetry = B*np.cos(2*np.pi*omega_a*t+phase_angles[0])
+#     return np.exp(-decay*t)*(symmetry+antisymmetry)+e
 
-def sin_function_refit(t, decay, A, B, e):
-    omega_s = xf[peaks[1]]
-    omega_a = xf[peaks[0]]
-    symmetry = A*np.cos(2*np.pi*omega_s*t+phase_angles[1])
-    antisymmetry = B*np.cos(2*np.pi*omega_a*t+phase_angles[0])
-    return np.exp(-decay*t)*(symmetry+antisymmetry)+e
-
-param, cov = curve_fit(
-    sin_function_refit,
-    t,
-    data_L['x']-params_L[-1],
-    p0=[4e-3, 0, 0, 0]   
-)
+# param, cov = curve_fit(
+#     sin_function_refit,
+#     t,
+#     data_L['x']-params_L[-1],
+#     p0=[4e-3, 0, 0, 0]   
+# )
 
 # print(param[1:-1])
 # plt.plot(t, data_L['x']-params_L[-1], label = 'raw data')
 # plt.plot(t, sin_function_refit(t, *param), label = 'fitted')
 # plt.show()
 ###############################################################################
+# import sys
+# sys.path.append('./coupled_pendulum_model')
+# from coupled_pendulum_model import move_1_coupled_pendulum
+# L = 0.41
+# s = 0.18
+# d = 0.21
+# md = move_1_coupled_pendulum(D=0.40, s=s, d=0.21, L=0.41)
+# print(md.omega_s/(2*np.pi), md.omega_a/(2*np.pi))
+
+# def sin_function_refit(t, decay, A, B, e,):
+#     omega_s = md.omega_s/(2*np.pi)
+#     omega_a = md.omega_a/(2*np.pi)
+#     symmetry = A*np.cos(2*np.pi*omega_s*t+phase_angles[1])
+#     antisymmetry = B*np.cos(2*np.pi*omega_a*t+phase_angles[0])
+#     return np.exp(-decay*t)*(symmetry+antisymmetry)+e
+
+# def sin_function_refit(t, A, decay, d, e):
+#     omega_s = md.omega_s
+#     omega_a = md.omega_a
+#     return A*np.exp(-decay*t)*np.cos(0.5*(omega_a-omega_s)*t+d)*np.cos(0.5*(omega_a+omega_s)*t+e)
+
+# param, cov = curve_fit(
+#     sin_function_refit,
+#     t,
+#     data_L['x']-params_L[-1],
+#     p0=[0.5, 4e-3, 0, 0]   
+# )
 
 
+# print(param)
+# plt.plot(t, data_L['x']-params_L[-1], label = 'raw data')
+# plt.plot(t, sin_function_refit(t, *param), label = 'fitted')
+# plt.show()

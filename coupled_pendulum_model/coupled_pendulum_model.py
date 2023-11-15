@@ -37,13 +37,13 @@ class move_1_coupled_pendulum:
         omega_s = np.sqrt(g/(self.L+self.s*np.cos(self.th)))
         omega_a = np.sqrt(g/(self.L+(0.5*self.d*self.s*np.cos(self.th))/\
             (0.5*self.d+self.s*np.cos(self.th))))
-        self.omega_s = omega_a
-        self.omega_a = omega_s
+        self.omega_s = omega_s
+        self.omega_a = omega_a
         return 
     
     def compute_N(self):
         N = (self.omega_s+self.omega_a)/(self.omega_s-self.omega_a)
-        self.N = N
+        self.N = np.abs(N)
         return
     
     

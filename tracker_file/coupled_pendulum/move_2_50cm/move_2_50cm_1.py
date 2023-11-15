@@ -44,72 +44,73 @@ params_L, covariance_L = curve_fit(
     data_L['x'],
     p0=[0.04169632, 0.00588499, np.pi/15.15, 2*np.pi/1.38577, 0.121, 3.946, 2.298, 0.0266],
 )  
-
-print(params_R)
-print(params_L)
-plt.scatter(new_t_R, data_R['x']-params_R[-1], label = 'experiment')
-plt.plot(new_t_R, sin_function(new_t_R, *params_R)-params_R[-1], label = 'fitted result')
-plt.scatter(new_t_L, data_L['x']-params_L[-1], label = 'experiment')
-plt.plot(new_t_L, sin_function(new_t_L, *params_L)-params_L[-1], label = 'fitted result')
-plt.legend()
-plt.title("Original data and fitted result")
-plt.xlabel(r"t")
-plt.ylabel(r"x")
-plt.show()
+data_L['x'] = data_L['x'] - params_L[-1]
+data_R['x'] = data_R['x'] - params_R[-1]
+# print(params_R)
+# print(params_L)
+# plt.scatter(new_t_R, data_R['x']-params_R[-1], label = 'experiment')
+# plt.plot(new_t_R, sin_function(new_t_R, *params_R)-params_R[-1], label = 'fitted result')
+# plt.scatter(new_t_L, data_L['x']-params_L[-1], label = 'experiment')
+# plt.plot(new_t_L, sin_function(new_t_L, *params_L)-params_L[-1], label = 'fitted result')
+# plt.legend()
+# plt.title("Original data and fitted result")
+# plt.xlabel(r"t")
+# plt.ylabel(r"x")
+# plt.show()
 ###############################################################################
 T = 94  # Total duration in seconds
-N = len(data_L['t'])  # Total number of data points
-fs = N / T  # Sampling rate in Hz
+# N = len(data_L['t'])  # Total number of data points
+# fs = N / T  # Sampling rate in Hz
 
-# Generate a time vector
-t = np.linspace(0, T, N, endpoint=False)  # Time vector from 0 to T seconds
-y_noisy = data_L['x']-params_L[-1]
+# # Generate a time vector
+# t = np.linspace(0, T, N, endpoint=False)  # Time vector from 0 to T seconds
+# y_noisy = data_L['x']-params_L[-1]
 
-# Apply FFT
-yf = np.fft.fft(y_noisy)
-xf = np.fft.fftfreq(N, 1/fs)
+# # Apply FFT
+# yf = np.fft.fft(y_noisy)
+# xf = np.fft.fftfreq(N, 1/fs)
 
-# Plotting
-plt.subplot(2,1,1)
-plt.plot(t, y_noisy)
-plt.title('Noisy Signal')
+# # Plotting
+# plt.subplot(2,1,1)
+# plt.plot(t, y_noisy)
+# plt.title('Noisy Signal')
 
-plt.subplot(2,1,2)
-plt.plot(xf, 2/N * np.abs(yf))
-plt.title('Magnitude Spectrum')
-plt.xlim([0, 1])  # Display only positive frequencies up to Nyquist frequency
-plt.xlabel('Frequency (Hz)')
-plt.ylabel('Magnitude')
+# plt.subplot(2,1,2)
+# plt.plot(xf, 2/N * np.abs(yf))
+# plt.title('Magnitude Spectrum')
+# plt.xlim([0, 1])  # Display only positive frequencies up to Nyquist frequency
+# plt.xlabel('Frequency (Hz)')
+# plt.ylabel('Magnitude')
 
-plt.tight_layout()
-plt.show()
+# plt.tight_layout()
+# plt.show()
 
-from scipy.signal import find_peaks
-yf = yf[:t.size//2]
-xf = xf[:t.size//2]
-peaks, _ = find_peaks(2/N*np.abs(yf), height=0.01)
-phase_angles = np.angle(yf[peaks])
+# from scipy.signal import find_peaks
+# yf = yf[:t.size//2]
+# xf = xf[:t.size//2]
+# peaks, _ = find_peaks(2/N*np.abs(yf), height=0.01)
+# phase_angles = np.angle(yf[peaks])
 
-print("Identified Peak Frequencies (Hz):", xf[peaks])
-print((xf[peaks[0]]+xf[peaks[1]])*np.pi)
-print((-xf[peaks[0]]+xf[peaks[1]])*np.pi)
+# print("Identified Peak Frequencies (Hz):", xf[peaks])
+# print((xf[peaks[0]]+xf[peaks[1]])*np.pi)
+# print((-xf[peaks[0]]+xf[peaks[1]])*np.pi)
 
-def sin_function_refit(t, decay, A, B, e):
-    omega_s = xf[peaks[1]]
-    omega_a = xf[peaks[0]]
-    symmetry = A*np.cos(2*np.pi*omega_s*t+phase_angles[1])
-    antisymmetry = B*np.cos(2*np.pi*omega_a*t+phase_angles[0])
-    return np.exp(-decay*t)*(symmetry+antisymmetry)+e
+# def sin_function_refit(t, decay, A, B, e):
+#     omega_s = xf[peaks[1]]
+#     omega_a = xf[peaks[0]]
+#     symmetry = A*np.cos(2*np.pi*omega_s*t+phase_angles[1])
+#     antisymmetry = B*np.cos(2*np.pi*omega_a*t+phase_angles[0])
+#     return np.exp(-decay*t)*(symmetry+antisymmetry)+e
 
-param, cov = curve_fit(
-    sin_function_refit,
-    t,
-    data_L['x']-params_L[-1],
-    p0=[4e-3, 0, 0, 0]   
-)
+# param, cov = curve_fit(
+#     sin_function_refit,
+#     t,
+#     data_L['x']-params_L[-1],
+#     p0=[4e-3, 0, 0, 0]   
+# )
 
-print(param[1:-1])
-plt.plot(t, data_L['x']-params_L[-1], label = 'raw data')
-plt.plot(t, sin_function_refit(t, *param), label = 'fitted')
-plt.legend()
-plt.show()
+# print(param[1:-1])
+# plt.plot(t, data_L['x']-params_L[-1], label = 'raw data')
+# plt.plot(t, sin_function_refit(t, *param), label = 'fitted')
+# plt.legend()
+# plt.show()

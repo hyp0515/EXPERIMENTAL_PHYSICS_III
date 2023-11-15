@@ -44,7 +44,8 @@ params_L, covariance_L = curve_fit(
     data_L['x'],
     p0=[0.1404, 0.003885, np.pi/91.15, 2*np.pi/1.3, 0, 0, 0.009],
 )  
-
+data_L['x'] = data_L['x'] - params_L[-1]
+data_R['x'] = data_R['x'] - params_R[-1]
 # print(params_R)
 # print(params_L)
 # plt.scatter(new_t_R, data_R['x'], label = 'experiment')
@@ -58,16 +59,16 @@ params_L, covariance_L = curve_fit(
 # plt.show()
 ###############################################################################
 T = 131  # Total duration in seconds
-N = len(data_R['t'])  # Total number of data points
-fs = N / T  # Sampling rate in Hz
+# N = len(data_R['t'])  # Total number of data points
+# fs = N / T  # Sampling rate in Hz
 
-# Generate a time vector
-t = np.linspace(0, T, N, endpoint=False)  # Time vector from 0 to T seconds
-y_noisy = data_R['x']
+# # Generate a time vector
+# t = np.linspace(0, T, N, endpoint=False)  # Time vector from 0 to T seconds
+# y_noisy = data_R['x']
 
-# Apply FFT
-yf = np.fft.fft(y_noisy)
-xf = np.fft.fftfreq(N, 1/fs)
+# # Apply FFT
+# yf = np.fft.fft(y_noisy)
+# xf = np.fft.fftfreq(N, 1/fs)
 
 # Plotting
 # plt.subplot(2,1,1)
@@ -83,11 +84,11 @@ xf = np.fft.fftfreq(N, 1/fs)
 
 # plt.tight_layout()
 # plt.show()
-from scipy.signal import find_peaks
-yf = yf[:t.size//2]
-xf = xf[:t.size//2]
-peaks, _ = find_peaks(2/N*np.abs(yf), height=0.01)
-peaks = np.append(peaks,peaks+2)
+# from scipy.signal import find_peaks
+# yf = yf[:t.size//2]
+# xf = xf[:t.size//2]
+# peaks, _ = find_peaks(2/N*np.abs(yf), height=0.01)
+# peaks = np.append(peaks,peaks+2)
 # print("Identified Peak Frequencies (Hz):", xf[peaks])
 # print(2/N*np.abs(yf[peaks]), 2/N*np.abs(yf[peaks+1]), 2/N*np.abs(yf[peaks+2]), 2/N*np.abs(yf[peaks+3]))
 # print(len(data_R['t']))

@@ -44,7 +44,8 @@ params_L, covariance_L = curve_fit(
     data_L['x'],
     p0=[1, 0.01, np.pi/24.28, 2*np.pi/1.42, 0, 0.009, 0]
 )  
-
+data_L['x'] = data_L['x'] - params_L[-1]
+data_R['x'] = data_R['x'] - params_R[-1]
 # print(params_R)
 # print(params_L)
 # plt.scatter(new_t_R, data_R['x']-params_R[-1], label = 'experiment')
@@ -63,16 +64,16 @@ params_L, covariance_L = curve_fit(
 #################################################################################
 # Parameters
 T = 73  # Total duration in seconds
-N = len(data_R['t'])  # Total number of data points
-fs = N / T  # Sampling rate in Hz
+# N = len(data_R['t'])  # Total number of data points
+# fs = N / T  # Sampling rate in Hz
 
-# Generate a time vector
-t = np.linspace(0, T, N, endpoint=False)  # Time vector from 0 to T seconds
-y_noisy = data_R['x']
+# # Generate a time vector
+# t = np.linspace(0, T, N, endpoint=False)  # Time vector from 0 to T seconds
+# y_noisy = data_R['x']
 
-# Apply FFT
-yf = np.fft.fft(y_noisy)
-xf = np.fft.fftfreq(N, 1/fs)
+# # Apply FFT
+# yf = np.fft.fft(y_noisy)
+# xf = np.fft.fftfreq(N, 1/fs)
 
 # # Plotting
 # plt.subplot(2,1,1)
@@ -91,17 +92,17 @@ xf = np.fft.fftfreq(N, 1/fs)
 
 ##
 
-T = 73  # Total duration in seconds
-N = len(data_L['t'])  # Total number of data points
-fs = N / T  # Sampling rate in Hz
+# T = 73  # Total duration in seconds
+# N = len(data_L['t'])  # Total number of data points
+# fs = N / T  # Sampling rate in Hz
 
-# Generate a time vector
-t = np.linspace(0, T, N, endpoint=False)  # Time vector from 0 to T seconds
-y_noisy = data_L['x']
+# # Generate a time vector
+# t = np.linspace(0, T, N, endpoint=False)  # Time vector from 0 to T seconds
+# y_noisy = data_L['x']
 
-# Apply FFT
-yf = np.fft.fft(y_noisy)
-xf = np.fft.fftfreq(N, 1/fs)
+# # Apply FFT
+# yf = np.fft.fft(y_noisy)
+# xf = np.fft.fftfreq(N, 1/fs)
 
 # Plotting
 # plt.subplot(2,1,1)
@@ -117,22 +118,22 @@ xf = np.fft.fftfreq(N, 1/fs)
 
 # plt.tight_layout()
 # plt.show()
-from scipy.signal import find_peaks
-yf = yf[:t.size//2]
-xf = xf[:t.size//2]
-peaks, _ = find_peaks(2/N*np.abs(yf), height=0.01)
-phase_angles = np.angle(yf[peaks])
+# from scipy.signal import find_peaks
+# yf = yf[:t.size//2]
+# xf = xf[:t.size//2]
+# peaks, _ = find_peaks(2/N*np.abs(yf), height=0.01)
+# phase_angles = np.angle(yf[peaks])
 
-# print("Identified Peak Frequencies (Hz):", xf[peaks]*2*np.pi)
-# print(0.5*2*np.pi*(+xf[peaks][0]+xf[peaks][1]))
+# # print("Identified Peak Frequencies (Hz):", xf[peaks]*2*np.pi)
+# # print(0.5*2*np.pi*(+xf[peaks][0]+xf[peaks][1]))
 
-import sys
-sys.path.append('./coupled_pendulum_model')
-from coupled_pendulum_model import move_1_coupled_pendulum
+# import sys
+# sys.path.append('./coupled_pendulum_model')
+# from coupled_pendulum_model import move_1_coupled_pendulum
 
 
-D_array = np.linspace(0.21, 0.56, 100)
-md = move_1_coupled_pendulum(D=D_array,s=0.18,d=0.21,L=0.41)  
+# D_array = np.linspace(0.21, 0.56, 100)
+# md = move_1_coupled_pendulum(D=D_array,s=0.18,d=0.21,L=0.41)  
 # plt.plot(D_array, md.omega_s, label='s')
 # plt.plot(D_array, md.omega_a, label='a')
 # # plt.legend()
