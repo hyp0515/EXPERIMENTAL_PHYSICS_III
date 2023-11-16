@@ -15,7 +15,7 @@ def extract_data_from_path(path):
 data_L = extract_data_from_path("./tracker_file/coupled_pendulum/move_2_46cm/move_2_46cm_1_L.xlsx")
 data_R = extract_data_from_path("./tracker_file/coupled_pendulum/move_2_46cm/move_2_46cm_1_R.xlsx")
 # sync time
-new_t_L = np.linspace(0, 96, len(data_L['t']))  
+data_L['t'] = np.linspace(0, 96, len(data_L['t']))  
 new_t_R = np.linspace(0, 96, len(data_R['t']))
  
 # plt.plot(new_t_L, data_L['x'], color = 'red')
@@ -24,7 +24,7 @@ new_t_R = np.linspace(0, 96, len(data_R['t']))
 ###############################################################################
 # Convenient function for getting index of time data and fitting
 def second_to_index_L(time):
-    return np.searchsorted(new_t_L, time)
+    return np.searchsorted(data_L['t'], time)
 def second_to_index_R(time):
     return np.searchsorted(new_t_R, time)
 ###############################################################################
@@ -44,19 +44,19 @@ def sin_function(t, A, decay, omega_1, omega_2, d, e, f, g):
 #     data_L['x'],
     
 # )  
-# data_L['x'] = data_L['x'] - params_L[-1]
-# data_R['x'] = data_R['x'] - params_R[-1]
+data_L['x'] = data_L['x'] 
+data_R['x'] = data_R['x'] 
 # print(params_R)
 # print(params_L)
-plt.scatter(new_t_R, data_R['x'], label = 'experiment')
-# plt.plot(new_t_R, sin_function(new_t_R, *params_R), label = 'fitted result')
-plt.scatter(new_t_L, data_L['x'], label = 'experiment')
-# plt.plot(new_t_L, sin_function(new_t_L, *params_L), label = 'fitted result')
-plt.legend()
-plt.title("Original data and fitted result")
-plt.xlabel(r"t")
-plt.ylabel(r"x")
-plt.show()
+# plt.scatter(new_t_R, data_R['x'], label = 'experiment')
+# # plt.plot(new_t_R, sin_function(new_t_R, *params_R), label = 'fitted result')
+# plt.scatter(new_t_L, data_L['x'], label = 'experiment')
+# # plt.plot(new_t_L, sin_function(new_t_L, *params_L), label = 'fitted result')
+# plt.legend()
+# plt.title("Original data and fitted result")
+# plt.xlabel(r"t")
+# plt.ylabel(r"x")
+# plt.show()
 ###############################################################################
 T = 96  # Total duration in seconds
 # N = len(data_L['t'])  # Total number of data points

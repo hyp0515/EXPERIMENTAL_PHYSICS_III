@@ -15,8 +15,8 @@ def extract_data_from_path(path):
 data_L = extract_data_from_path("./tracker_file/coupled_pendulum/move_1_55cm/move_1_55cm_1_L.xlsx")
 data_R = extract_data_from_path("./tracker_file/coupled_pendulum/move_1_55cm/move_1_55cm_1_R.xlsx")
 # sync time
-new_t_L = np.linspace(0, 131, len(data_L['t']))  
-new_t_R = np.linspace(0, 131, len(data_R['t']))
+data_L['t'] = np.linspace(0, 131, len(data_L['t']))  
+data_R['t'] = np.linspace(0, 131, len(data_R['t']))
  
 # plt.plot(new_t_L, data_L['x'], color = 'red')
 # plt.plot(new_t_R, data_R['x'], color = 'blue')
@@ -24,9 +24,9 @@ new_t_R = np.linspace(0, 131, len(data_R['t']))
 ###############################################################################
 # Convenient function for getting index of time data
 def second_to_index_L(time):
-    return np.searchsorted(new_t_L, time)
+    return np.searchsorted(data_L['t'], time)
 def second_to_index_R(time):
-    return np.searchsorted(new_t_R, time)
+    return np.searchsorted(data_R['t'], time)
 ###############################################################################
 # Fitting x displacement to get the period of the pendulum
 def sin_function(t, A, decay, omega_1, omega_2, d, e, f):   
@@ -34,13 +34,13 @@ def sin_function(t, A, decay, omega_1, omega_2, d, e, f):
 
 params_R, covariance_R = curve_fit(
     sin_function, 
-    new_t_R, 
+    data_R['t'], 
     data_R['x'],
     p0=[0.19, 0.0045, np.pi/95, 2*np.pi/1.35, 0, 0, 0.009],
 )  
 params_L, covariance_L = curve_fit(
     sin_function, 
-    new_t_L, 
+    data_L['t'], 
     data_L['x'],
     p0=[0.1404, 0.003885, np.pi/91.15, 2*np.pi/1.3, 0, 0, 0.009],
 )  
