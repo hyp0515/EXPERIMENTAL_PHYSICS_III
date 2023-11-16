@@ -48,15 +48,16 @@ data_L['x'] = data_L['x'] - params_L[-1]
 data_R['x'] = data_R['x'] - params_R[-1]
 # print(params_R)
 # print(params_L)
-# plt.scatter(new_t_R, data_R['x']-params_R[-1], label = 'experiment')
-# plt.plot(new_t_R, sin_function(new_t_R, *params_R)-params_R[-1], label = 'fitted result')
-# plt.scatter(new_t_L, data_L['x']-params_L[-1], label = 'experiment')
-# plt.plot(new_t_L, sin_function(new_t_L, *params_L)-params_L[-1], label = 'fitted result')
-# plt.legend()
-# plt.title("Original data and fitted result")
-# plt.xlabel(r"t")
-# plt.ylabel(r"x")
-# plt.show()
+plt.scatter(data_R['t'], data_R['x'], label = 'experiment')
+plt.plot(data_R['t'], sin_function(data_R['t'], *params_R)-params_R[-1], label = 'fitted result')
+plt.scatter(data_L['t'], data_L['x'], label = 'experiment')
+plt.plot(data_L['t'], sin_function(data_L['t'], *params_L)-params_L[-1], label = 'fitted result')
+plt.legend()
+plt.title("Original data and fitted result")
+plt.xlabel(r"t[s]")
+plt.ylabel(r"x[m]")
+plt.savefig('./Figures/move_2_50cm')
+plt.show()
 ###############################################################################
 T = 94  # Total duration in seconds
 # N = len(data_L['t'])  # Total number of data points

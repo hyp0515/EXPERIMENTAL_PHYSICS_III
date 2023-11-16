@@ -46,17 +46,19 @@ params_L, covariance_L = curve_fit(
 )  
 data_L['x'] = data_L['x'] - params_L[-1]
 data_R['x'] = data_R['x'] - params_R[-1]
-# print(params_R)
-# print(params_L)
-# plt.scatter(new_t_R, data_R['x'], label = 'experiment')
-# plt.plot(new_t_R, sin_function(new_t_R, *params_R), label = 'fitted result')
-# plt.scatter(new_t_L, data_L['x'], label = 'experiment')
-# plt.plot(new_t_L, sin_function(new_t_L, *params_L), label = 'fitted result')
-# plt.legend()
-# plt.title("Original data and fitted result")
-# plt.xlabel(r"t")
-# plt.ylabel(r"x")
-# plt.show()
+print(params_R)
+print(params_L)
+# plt.figure(figsize=(8, 6))
+# plt.scatter(data_R['t'], data_R['x'], label = 'experiment')
+# plt.plot(data_R['t'], sin_function(data_R['t'], *params_R)- params_R[-1], label = 'fitted result')
+plt.scatter(data_L['t'], data_L['x'], label = 'experiment')
+plt.plot(data_L['t'], sin_function(data_L['t'], *params_L)- params_L[-1], label = 'fitted result')
+plt.legend()
+plt.title("Original data and fitted result")
+plt.xlabel(r"t[s]")
+plt.ylabel(r"x[m]")
+plt.savefig('./Figures/fitted_result_move_2')
+plt.show()
 ###############################################################################
 T = 140  # Total duration in seconds
 # N = len(data_L['t'])  # Total number of data points
@@ -71,6 +73,7 @@ T = 140  # Total duration in seconds
 # xf = np.fft.fftfreq(N, 1/fs)
 
 # # Plotting
+# plt.figure(figsize=(8,6))
 # plt.subplot(2,1,1)
 # plt.plot(t, y_noisy)
 # plt.title('Original data')
