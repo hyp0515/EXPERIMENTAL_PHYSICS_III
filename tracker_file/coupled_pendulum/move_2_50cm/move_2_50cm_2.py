@@ -64,7 +64,7 @@ T = 93  # Total duration in seconds
 
 # # Generate a time vector
 # t = np.linspace(0, T, N, endpoint=False)  # Time vector from 0 to T seconds
-# y_noisy = data_L['x']-params_L[-1]
+# y_noisy = data_L['x']
 
 # # Apply FFT
 # yf = np.fft.fft(y_noisy)
@@ -78,7 +78,7 @@ T = 93  # Total duration in seconds
 # plt.subplot(2,1,2)
 # plt.plot(xf, 2/N * np.abs(yf))
 # plt.title('Magnitude Spectrum')
-# plt.xlim([0, 1])  # Display only positive frequencies up to Nyquist frequency
+# plt.xlim([0.4, 1])  # Display only positive frequencies up to Nyquist frequency
 # plt.xlabel('Frequency (Hz)')
 # plt.ylabel('Magnitude')
 

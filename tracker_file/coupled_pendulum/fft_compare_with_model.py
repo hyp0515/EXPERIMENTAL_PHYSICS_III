@@ -38,7 +38,7 @@ def find_omega(df):
     pL = xf_L[peaks_L]
     pR = xf_R[peaks_R]
     if len(pR)==1:
-        pR = np.append(pR, xf_R[peaks_R+2])
+        pR = np.append(pR, xf_R[peaks_R+3])
         # pR = pR[::-1]
     return pL, pR
 def plot(D, omega):
@@ -86,5 +86,5 @@ plt.title(r'Compare experiment data with model ($\omega$)')
 plt.ylabel(r'$\omega [1/s]$')
 plt.xlabel(r'$D [m]$')
 plt.legend()
-plt.savefig('fft_compare_with_model')
+plt.savefig('./Figures/fft_compare_with_model')
 # plt.show()

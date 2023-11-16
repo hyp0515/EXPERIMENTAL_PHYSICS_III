@@ -43,6 +43,17 @@ params_R, covariance_R = curve_fit(
 )
 data_L['x'] = data_L['x'] - params_L[-1]
 data_R['x'] = data_R['x'] - params_R[-1]
+# plt.scatter(data_R['t'], data_R['x'], label = 'experiment')
+# plt.plot(data_R['t'], sin_function(data_R['t'], *params_R)- params_R[-1], label = 'fitted result')
+# plt.scatter(data_L['t'], data_L['x'], label = 'experiment')
+# plt.plot(data_L['t'], sin_function(data_L['t'], *params_L)- params_L[-1], label = 'fitted result') 
+# plt.legend()
+# plt.title("Original data and fitted result")
+# # plt.xlim((10,60))
+# plt.xlabel(r"t[s]")
+# plt.ylabel(r"x[m]")
+# plt.savefig('./Figures/move_1_40cm_1')
+# plt.show()
 ###############################################################################
 T = 69  # Total duration in seconds
 # N = len(data_L['t'])  # Total number of data points
@@ -50,25 +61,26 @@ T = 69  # Total duration in seconds
 
 # # Generate a time vector
 # t = data_L['t'].copy()  # Time vector from 0 to T seconds
-# y_noisy = data_L['x']-params_L[-1]
+# y_noisy = data_L['x']
 
 # # Apply FFT
 # yf = np.fft.fft(y_noisy)
 # xf = np.fft.fftfreq(N, 1/fs)
 
-# Plotting
+# # Plotting
 # plt.subplot(2,1,1)
 # plt.plot(t, y_noisy)
-# plt.title('Noisy Signal')
+# plt.title('Original data')
 
 # plt.subplot(2,1,2)
 # plt.plot(xf, 2/N * np.abs(yf))
 # plt.title('Magnitude Spectrum')
-# plt.xlim([0, 1])  # Display only positive frequencies up to Nyquist frequency
+# plt.xlim([0.4, 1])  # Display only positive frequencies up to Nyquist frequency
 # plt.xlabel('Frequency (Hz)')
 # plt.ylabel('Magnitude')
 
 # plt.tight_layout()
+# plt.savefig('./Figures/fft_move_1')
 # plt.show()
 
 

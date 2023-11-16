@@ -59,30 +59,31 @@ data_R['x'] = data_R['x'] - params_R[-1]
 # plt.show()
 ###############################################################################
 T = 131  # Total duration in seconds
-# N = len(data_R['t'])  # Total number of data points
+# N = len(data_L['t'])  # Total number of data points
 # fs = N / T  # Sampling rate in Hz
 
 # # Generate a time vector
-# t = np.linspace(0, T, N, endpoint=False)  # Time vector from 0 to T seconds
-# y_noisy = data_R['x']
+# t = data_L['t']  # Time vector from 0 to T seconds
+# y_noisy = data_L['x']
 
 # # Apply FFT
 # yf = np.fft.fft(y_noisy)
 # xf = np.fft.fftfreq(N, 1/fs)
 
-# Plotting
+# # Plotting
 # plt.subplot(2,1,1)
 # plt.plot(t, y_noisy)
-# plt.title('Noisy Signal')
+# plt.title('Original data')
 
 # plt.subplot(2,1,2)
 # plt.plot(xf, 2/N * np.abs(yf))
 # plt.title('Magnitude Spectrum')
-# plt.xlim([0, 1])  # Display only positive frequencies up to Nyquist frequency
+# plt.xlim([0.6, 0.9])  # Display only positive frequencies up to Nyquist frequency
 # plt.xlabel('Frequency (Hz)')
 # plt.ylabel('Magnitude')
 
 # plt.tight_layout()
+# plt.savefig('./Figures/fft_move_1_55cm')
 # plt.show()
 # from scipy.signal import find_peaks
 # yf = yf[:t.size//2]
