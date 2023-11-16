@@ -52,7 +52,7 @@ D_array, md = model_with_different_D()
 plt.plot(D_array, md.omega_s, label='Symmetry', color = 'r')
 plt.plot(D_array, md.omega_a, label='Anti-Symmetry', color = 'y')
 
-for D in [40, 55, 30, 50]:
+for D in [40, 55, 30, 50, 46, 54]:
     if D == 40:
         for num in range(1,3):
             df = extract_data_from_module(1, D, num=num)
@@ -70,6 +70,15 @@ for D in [40, 55, 30, 50]:
         pL, pR = find_omega(df)
         plot(D, pL); plot(D, pR)
     if D ==50:
+        for num in range(1,3):
+            df = extract_data_from_module(2, D, num=num)
+            pL, pR = find_omega(df)
+            plot(D, pL); plot(D, pR)
+    if D==46:
+        df = extract_data_from_module(2, D, num=2)
+        pL, pR = find_omega(df)
+        plot(D, pL); plot(D, pR)
+    if D==54:
         df = extract_data_from_module(2, D)
         pL, pR = find_omega(df)
         plot(D, pL); plot(D, pR)
