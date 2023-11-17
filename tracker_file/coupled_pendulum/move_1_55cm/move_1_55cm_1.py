@@ -46,18 +46,18 @@ params_L, covariance_L = curve_fit(
 )  
 data_L['x'] = data_L['x'] - params_L[-1]
 data_R['x'] = data_R['x'] - params_R[-1]
-# print(params_R)
-# print(params_L)
-plt.scatter(data_R['t'], data_R['x'], label = 'experiment')
-plt.plot(data_R['t'], sin_function(data_R['t'], *params_R)- params_R[-1], label = 'fitted result')
-plt.scatter(data_L['t'], data_L['x'], label = 'experiment')
-plt.plot(data_L['t'], sin_function(data_L['t'], *params_L)- params_L[-1], label = 'fitted result')
-plt.legend()
-plt.title("Original data and fitted result")
-plt.xlabel(r"t[s]")
-plt.ylabel(r"x[m]")
-plt.savefig('./Figures/move_1_55cm_1')
-plt.show()
+print(params_R[2:4])
+print(params_L[2:4])
+# plt.scatter(data_R['t'], data_R['x'], label = 'experiment')
+# plt.plot(data_R['t'], sin_function(data_R['t'], *params_R)- params_R[-1], label = 'fitted result')
+# plt.scatter(data_L['t'], data_L['x'], label = 'experiment')
+# plt.plot(data_L['t'], sin_function(data_L['t'], *params_L)- params_L[-1], label = 'fitted result')
+# plt.legend()
+# plt.title("Original data and fitted result")
+# plt.xlabel(r"t[s]")
+# plt.ylabel(r"x[m]")
+# plt.savefig('./Figures/move_1_55cm_1')
+# plt.show()
 ###############################################################################
 T = 131  # Total duration in seconds
 # N = len(data_L['t'])  # Total number of data points

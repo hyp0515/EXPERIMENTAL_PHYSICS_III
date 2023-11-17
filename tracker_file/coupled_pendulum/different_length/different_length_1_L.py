@@ -5,23 +5,32 @@ from scipy.optimize import curve_fit
 from scipy.signal import find_peaks
 
 
-def extract_data_from_path(path):
+def extract_data_from_path(path, R=False):
+    
+    if R is True:
+        df = pd.read_excel(path, engine='openpyxl')
+        raw_data = np.array(df)
+        # raw_data[:, 3] = np.deg2rad(raw_data[:, 3])
+        columns = ['t', 'x', 'y', 'theta']
+        data = {col: raw_data[:, idx] for idx, col in enumerate(columns)}
     df = pd.read_excel(path, engine='openpyxl')
     raw_data = np.array(df)
-    raw_data[:, 4] = np.deg2rad(raw_data[:, 4])
-    columns = ['t', 'x', 'y', 'r', 'theta']
+    # raw_data[:, 4] = np.deg2rad(raw_data[:, 4])
+    columns = ['t', 'x', 'y', 'r']
     data = {col: raw_data[:, idx] for idx, col in enumerate(columns)}
     return data
 
 data_L = extract_data_from_path("./tracker_file/coupled_pendulum/different_length/different_length_1_L.xlsx")
-
+data_R = extract_data_from_path("./tracker_file/coupled_pendulum/different_length/different_length_1_R.xlsx", R=True)
 data_L['t'] = np.linspace(0, 93, len(data_L['t']), endpoint=False)
-
-plt.plot(data_L['t'], data_L['x'])
+data_R['t'] = np.linspace(0, 93, len(data_R['t']), endpoint=False)
+plt.plot(data_R['t'], data_R['x'], label='R')
+plt.plot(data_L['t'], data_L['x'], label='L')
 plt.xlim((20,60))
 plt.xlabel(r"t[s]")
 plt.ylabel(r"x[m]")
 plt.title('Different Length')
+plt.legend()
 plt.savefig('./Figures/different_length')
 plt.show()
 

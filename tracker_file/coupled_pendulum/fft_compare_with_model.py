@@ -48,43 +48,46 @@ def plot(D, omega):
 
 
 
-D_array, md = model_with_different_D()
-plt.plot(D_array, md.omega_s, label='Symmetry', color = 'r')
-plt.plot(D_array, md.omega_a, label='Anti-Symmetry', color = 'y')
+# D_array, md = model_with_different_D()
+# plt.plot(D_array, md.omega_s, label='Symmetry', color = 'r')
+# plt.plot(D_array, md.omega_a, label='Anti-Symmetry', color = 'y')
 
-for D in [40, 55, 30, 50, 46, 54]:
-    if D == 40:
-        for num in range(1,3):
-            df = extract_data_from_module(1, D, num=num)
-            pL, pR = find_omega(df)
-            plot(D, pL); plot(D, pR)
-    if D == 55:
-        df = extract_data_from_module(1, D)
-        pL, pR = find_omega(df)
-        plot(D, pL); plot(D, pR)
-        df = extract_data_from_module(2, D)
-        pL, pR = find_omega(df)
-        plot(D, pL); plot(D, pR)
-    if D ==30:
-        df = extract_data_from_module(2, D)
-        pL, pR = find_omega(df)
-        plot(D, pL); plot(D, pR)
-    if D ==50:
-        for num in range(1,3):
-            df = extract_data_from_module(2, D, num=num)
-            pL, pR = find_omega(df)
-            plot(D, pL); plot(D, pR)
-    if D==46:
-        df = extract_data_from_module(2, D, num=2)
-        pL, pR = find_omega(df)
-        plot(D, pL); plot(D, pR)
-    if D==54:
-        df = extract_data_from_module(2, D)
-        pL, pR = find_omega(df)
-        plot(D, pL); plot(D, pR)
-plt.title(r'Compare experiment data with model ($\omega$)')
-plt.ylabel(r'$\omega [1/s]$')
-plt.xlabel(r'$D [m]$')
-plt.legend()
-plt.savefig('./Figures/fft_compare_with_model')
+# for D in [40, 55, 30, 50, 46, 54]:
+#     if D == 40:
+#         for num in range(1,3):
+#             df = extract_data_from_module(1, D, num=num)
+#             pL, pR = find_omega(df)
+#             plot(D, pL); plot(D, pR)
+#     if D == 55:
+#         df = extract_data_from_module(1, D)
+#         pL, pR = find_omega(df)
+#         plot(D, pL); plot(D, pR)
+#         df = extract_data_from_module(2, D)
+#         pL, pR = find_omega(df)
+#         plot(D, pL); plot(D, pR)
+#     if D ==30:
+#         df = extract_data_from_module(2, D)
+#         pL, pR = find_omega(df)
+#         plot(D, pL); plot(D, pR)
+#     if D ==50:
+#         for num in range(1,3):
+#             df = extract_data_from_module(2, D, num=num)
+#             pL, pR = find_omega(df)
+#             plot(D, pL); plot(D, pR)
+#     if D==46:
+#         df = extract_data_from_module(2, D, num=2)
+#         pL, pR = find_omega(df)
+#         plot(D, pL); plot(D, pR)
+#     if D==54:
+#         df = extract_data_from_module(2, D)
+#         pL, pR = find_omega(df)
+#         plot(D, pL); plot(D, pR)
+# plt.title(r'Compare experiment data with model ($\omega$)')
+# plt.ylabel(r'$\omega [1/s]$')
+# plt.xlabel(r'$D [m]$')
+# plt.legend()
+# plt.savefig('./Figures/fft_compare_with_model')
 # plt.show()
+D_array, md = model_with_different_D(0.55)
+print(md.omega_s, md.omega_a)
+print(0.5*(md.omega_s+md.omega_a), -0.5*(md.omega_s-md.omega_a))
